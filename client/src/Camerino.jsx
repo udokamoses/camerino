@@ -66,7 +66,7 @@ export default function Camerino() {
     setError(null);
     setOutfits(null);
     try {
-      const response = await fetch("http://localhost:3001/api/style", {
+      const response = await fetch("https://camerino.onrender.com/api/style", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
