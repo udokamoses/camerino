@@ -174,13 +174,6 @@ export default function LandingPage({ onGetStarted }) {
               <button style={s.btnCream} className="lp-btn-cream" onClick={onGetStarted}>Open your wardrobe →</button>
               <button style={s.btnCreamOutline} className="lp-btn-cream-outline">See examples</button>
             </div>
-            <div style={s.heroStats} className="lp-hero-stats">
-              {[["5", "Looks per upload"], ["10s", "To generate"], ["🌍", "Born global"]].map(([n]) => (
-                <div key={n}>
-                  <div style={s.statNum} className="lp-stat-num">{n}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 

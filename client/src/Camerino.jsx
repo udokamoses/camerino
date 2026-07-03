@@ -146,15 +146,15 @@ export default function Camerino({ gender, user, onChangeGender }) {
           <LogoMark size={34} />
           <span style={s.logoWord}>Camerino</span>
         </div>
-        <div style={s.navCenter}>
-          <span style={s.genderTag} onClick={onChangeGender}>
+        <div style={s.navCenter} className="camerino-nav-center">
+          <span style={s.genderTag} className="camerino-gender-tag" onClick={onChangeGender}>
             {gender === "male" ? "👔 Men's" : "👗 Women's"} styles
             <span style={s.changeTag}>Change</span>
           </span>
         </div>
         <div style={s.navRight}>
           {saved.length > 0 && <div style={s.savedBadge}>♥ {saved.length} saved</div>}
-          <span style={s.userName}>{user?.displayName?.split(" ")[0] || user?.email?.split("@")[0]}</span>
+          <span style={s.userName} className="camerino-user-name">{user?.displayName?.split(" ")[0] || user?.email?.split("@")[0]}</span>
           <button style={s.signOutBtn} onClick={() => signOut(auth)}>Sign out</button>
         </div>
       </nav>
@@ -163,8 +163,8 @@ export default function Camerino({ gender, user, onChangeGender }) {
         {!image ? (
           /* Upload Zone */
           <div style={s.uploadSection}>
-            <h1 style={s.uploadH1}>What are we styling <em style={{ fontStyle: "italic", color: "#4A7C42" }}>today?</em></h1>
-            <p style={s.uploadSub}>Upload any clothing item and get 5 complete outfit ideas instantly</p>
+            <h1 style={s.uploadH1} className="camerino-upload-h1">What are we styling <em style={{ fontStyle: "italic", color: "#4A7C42" }}>today?</em></h1>
+            <p style={s.uploadSub} className="camerino-upload-sub">Upload any clothing item and get 5 complete outfit ideas instantly</p>
             <div
               style={{ ...s.uploadZone, ...(dragOver ? s.uploadZoneDrag : {}) }}
               onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
@@ -354,9 +354,30 @@ export default function Camerino({ gender, user, onChangeGender }) {
           .camerino-app-nav { padding: 0 16px !important; }
           .camerino-preview-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .camerino-app-main { padding: 24px 16px !important; }
+          .camerino-upload-h1 { font-size: 32px !important; }
+          .camerino-upload-sub { font-size: 14px !important; margin-bottom: 28px !important; }
         }
-        @media (max-width: 480px) {
-          .camerino-app-nav { flex-wrap: wrap; height: auto !important; padding: 10px 12px !important; gap: 8px; }
+        @media (max-width: 640px) {
+          .camerino-app-nav {
+            flex-wrap: wrap;
+            height: auto !important;
+            padding: 10px 12px !important;
+            gap: 8px;
+            row-gap: 6px;
+          }
+          .camerino-nav-center {
+            position: static !important;
+            transform: none !important;
+            order: 3;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+          }
+          .camerino-gender-tag { font-size: 11px !important; padding: 5px 12px !important; }
+          .camerino-user-name { display: none !important; }
+        }
+        @media (max-width: 420px) {
+          .camerino-upload-h1 { font-size: 26px !important; }
         }
       `}</style>
     </div>
