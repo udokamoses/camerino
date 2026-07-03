@@ -13,9 +13,12 @@ For each outfit, provide:
 4. A 1-sentence vibe description
 5. Exactly 3 colors in the outfit as hex codes
 
+Also identify the garment type in 2-4 plain words a stock photo site would recognize (e.g. "short sleeve shirt", "denim jacket", "midi dress", "cargo pants") — no colors or styling detail, just the item category and silhouette.
+
 Respond ONLY with valid JSON. No markdown, no preamble. Format:
 {
   "item_description": "brief description of the uploaded clothing item",
+  "garment_type": "2-4 word plain garment category",
   "outfits": [
     {
       "name": "outfit name",
@@ -101,9 +104,9 @@ export default function Camerino({ gender, user, onChangeGender }) {
       const withImages = await Promise.all(
         parsed.outfits.map(async (o, i) => {
           try {
-            const genderWord = gender === "male" ? "man male mens fashion" : "woman female womens fashion";
-            const topPiece = (o.pieces && o.pieces[0]) ? o.pieces[0].split(",")[0] : "";
-            const q = `${genderWord} full body outfit ${topPiece} ${o.occasion}`.slice(0, 100);
+            const genderWord = gender === "male" ? "man male" : "woman female";
+            const garment = parsed.garment_type || "";
+            const q = `${genderWord} ${garment} ${o.occasion}`.slice(0, 100);
             const imgRes = await fetch(
               `https://camerino.onrender.com/api/outfit-image?query=${encodeURIComponent(q)}&page=${i + 1}`
             );
@@ -136,9 +139,9 @@ export default function Camerino({ gender, user, onChangeGender }) {
   };
 
   return (
-    <div style={s.root}>
+    <div style={s.root} className="camerino-app-root">
       {/* Nav */}
-      <nav style={s.nav}>
+      <nav style={s.nav} className="camerino-app-nav">
         <div style={s.navLogo}>
           <LogoMark size={34} />
           <span style={s.logoWord}>Camerino</span>
@@ -156,7 +159,7 @@ export default function Camerino({ gender, user, onChangeGender }) {
         </div>
       </nav>
 
-      <main style={s.main}>
+      <main style={s.main} className="camerino-app-main">
         {!image ? (
           /* Upload Zone */
           <div style={s.uploadSection}>
@@ -179,7 +182,7 @@ export default function Camerino({ gender, user, onChangeGender }) {
             {/* Sample outfit grid preview */}
             <div style={s.previewSection}>
               <p style={s.previewLabel}>Recent looks</p>
-              <div style={s.previewGrid}>
+              <div style={s.previewGrid} className="camerino-preview-grid">
                 {UNSPLASH_OUTFITS.slice(0, 4).map((url, i) => (
                   <div key={i} style={s.previewCard}>
                     <img src={url} alt="outfit" style={s.previewImg} onError={e => e.target.style.display='none'} />
@@ -346,6 +349,15 @@ export default function Camerino({ gender, user, onChangeGender }) {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
         @keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-8px)} }
+
+        @media (max-width: 860px) {
+          .camerino-app-nav { padding: 0 16px !important; }
+          .camerino-preview-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .camerino-app-main { padding: 24px 16px !important; }
+        }
+        @media (max-width: 480px) {
+          .camerino-app-nav { flex-wrap: wrap; height: auto !important; padding: 10px 12px !important; gap: 8px; }
+        }
       `}</style>
     </div>
   );
