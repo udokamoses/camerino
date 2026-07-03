@@ -15,15 +15,16 @@ export default function AuthPage({ onBack }) {
   const [loading, setLoading] = useState(false);
 
   const handleGoogle = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      await signInWithPopup(auth, googleProvider);
-    } catch (e) {
-      setError("Google sign in failed. Please try again.");
-    }
-    setLoading(false);
-  };
+ setLoading(true);
+ setError("");
+ try {
+ await signInWithPopup(auth, googleProvider);
+ } catch (e) {
+ console.error("Google sign in error:", e);
+ setError("Google sign in failed. Please try again.");
+ }
+ setLoading(false);
+ };
 
   const handleEmail = async () => {
     setLoading(true);
