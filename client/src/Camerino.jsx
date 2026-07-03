@@ -101,7 +101,8 @@ export default function Camerino({ gender, user, onChangeGender }) {
       const withImages = await Promise.all(
         parsed.outfits.map(async (o) => {
           try {
-            const q = `${o.name} ${o.occasion} outfit fashion`;
+            const genderWord = gender === "male" ? "man male mens fashion" : "woman female womens fashion";
+            const q = `${genderWord} full body outfit ${o.occasion}`;
             const imgRes = await fetch(
               `https://camerino.onrender.com/api/outfit-image?query=${encodeURIComponent(q)}`
             );
