@@ -27,20 +27,17 @@ app.post("/api/style", async (req, res) => {
 
 app.get("/api/outfit-image", async (req, res) => {
   try {
-    const { query } = req.query;
+    const { query, page } = req.query;
     if (!query) return res.status(400).json({ error: "Missing query" });
 
     const { default: fetch } = await import("node-fetch");
     const response = await fetch(
-      `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1&orientation=portrait`,
-      {
-        headers: { Authorization: process.env.PEXELS_API_KEY },
-      }
+      `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1&page=${page || 1}&orientation=landscape`,
+      { headers: { Authorization: process.env.PEXELS_API_KEY } }
     );
     const data = await response.json();
     const photo = data.photos?.[0];
-    const imageUrl = photo?.src?.large || null;
-    res.json({ imageUrl });
+    res.json({ imageUrl: photo?.src?.large || null });
   } catch (err) {
     res.status(500).json({ error: "Image fetch failed" });
   }
