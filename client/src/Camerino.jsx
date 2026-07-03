@@ -99,12 +99,13 @@ export default function Camerino({ gender, user, onChangeGender }) {
 
       // Fetch a matching hero image per outfit from Pexels
       const withImages = await Promise.all(
-        parsed.outfits.map(async (o) => {
+        parsed.outfits.map(async (o, i) => {
           try {
             const genderWord = gender === "male" ? "man male mens fashion" : "woman female womens fashion";
-            const q = `${genderWord} full body outfit ${o.occasion}`;
+            const topPiece = (o.pieces && o.pieces[0]) ? o.pieces[0].split(",")[0] : "";
+            const q = `${genderWord} full body outfit ${topPiece} ${o.occasion}`.slice(0, 100);
             const imgRes = await fetch(
-              `https://camerino.onrender.com/api/outfit-image?query=${encodeURIComponent(q)}`
+              `https://camerino.onrender.com/api/outfit-image?query=${encodeURIComponent(q)}&page=${i + 1}`
             );
             const imgData = await imgRes.json();
             return { ...o, heroImage: imgData.imageUrl || null };
@@ -426,8 +427,8 @@ const s = {
   tab: { width: 36, height: 36, borderRadius: "50%", border: "1.5px solid #D8E8D4", background: "transparent", color: "#A8B8A8", cursor: "pointer", fontSize: 14, fontFamily: "Georgia, serif", transition: "all 0.2s" },
   tabActive: { background: "rgba(45,90,39,0.06)" },
   outfitCard: { background: "#fff", border: "1px solid", borderRadius: 20, overflow: "hidden", marginBottom: 20, boxShadow: "0 4px 20px rgba(45,90,39,0.06)" },
-  outfitPhotoWrap: { position: "relative", height: 240, overflow: "hidden", background: "linear-gradient(160deg,#3d6b38,#1a3818)" },
-  outfitPhoto: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
+  outfitPhotoWrap: { position: "relative", height: 420, overflow: "hidden", background: "linear-gradient(160deg,#3d6b38,#1a3818)" },
+  outfitPhoto: { width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block" },
   outfitPhotoBadge: { position: "absolute", top: 16, left: 16, borderRadius: 20, padding: "4px 14px", fontSize: 11, fontWeight: 600, color: "#fff", letterSpacing: "0.08em", textTransform: "uppercase" },
   outfitCardBody: { padding: 24 },
   outfitTop: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 },
