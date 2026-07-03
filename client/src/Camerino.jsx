@@ -94,9 +94,25 @@ export default function Camerino({ gender, user, onChangeGender }) {
       const text = data.content?.find(b => b.type === "text")?.text || "";
       const clean = text.replace(/```json|```/g, "").trim();
       const parsed = JSON.parse(clean);
-      setOutfits(parsed.outfits);
       setItemDesc(parsed.item_description);
       setSelected(0);
+
+      // Fetch a matching hero image per outfit from Pexels
+      const withImages = await Promise.all(
+        parsed.outfits.map(async (o) => {
+          try {
+            const q = `${o.name} ${o.occasion} outfit fashion`;
+            const imgRes = await fetch(
+              `https://camerino.onrender.com/api/outfit-image?query=${encodeURIComponent(q)}`
+            );
+            const imgData = await imgRes.json();
+            return { ...o, heroImage: imgData.imageUrl || null };
+          } catch {
+            return { ...o, heroImage: null };
+          }
+        })
+      );
+      setOutfits(withImages);
     } catch (err) {
       setError("Something went wrong. Please try again.");
     }
@@ -249,7 +265,7 @@ export default function Camerino({ gender, user, onChangeGender }) {
                     {/* Model photo */}
                     <div style={s.outfitPhotoWrap}>
                       <img
-                        src={UNSPLASH_OUTFITS[selected]}
+                        src={outfits[selected].heroImage || UNSPLASH_OUTFITS[selected]}
                         alt="outfit inspiration"
                         style={s.outfitPhoto}
                         onError={e => e.target.style.display='none'}
