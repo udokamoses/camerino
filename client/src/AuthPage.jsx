@@ -192,7 +192,7 @@ function GoogleIcon() {
 const s = {
   root: { display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "100vh", fontFamily: "Inter, sans-serif" },
   // Left
-  left: { background: "#2D5A27", padding: "48px 64px", display: "flex", flexDirection: "column" },
+  left: { background: "linear-gradient(rgba(45,90,39,0.88), rgba(45,90,39,0.88)), url('https://images.pexels.com/photos/8581058/pexels-photo-8581058.jpeg') center/cover no-repeat", padding: "48px 64px", display: "flex", flexDirection: "column" },
   backBtn: { background: "transparent", border: "1px solid rgba(245,240,224,0.3)", borderRadius: 50, padding: "8px 18px", color: "#F5F0E0", fontSize: 13, cursor: "pointer", alignSelf: "flex-start", marginBottom: 24, fontFamily: "Inter, sans-serif" },
   leftContent: { display: "flex", flexDirection: "column", gap: 24, flex: 1, justifyContent: "center" },
   leftH2: { fontFamily: "Georgia, serif", fontSize: 48, fontWeight: 300, color: "#F5F0E0", lineHeight: 1.15 },
@@ -202,13 +202,13 @@ const s = {
   check: { width: 24, height: 24, background: "#4A7C42", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 12, flexShrink: 0 },
   featureText: { fontSize: 14, color: "rgba(245,240,224,0.85)" },
   // Right
-  right: { background: "#FAF7EE", display: "flex", alignItems: "center", justifyContent: "center", padding: 40 },
+  right: { background: "linear-gradient(rgba(250,247,238,0.93), rgba(250,247,238,0.93)), url('https://images.pexels.com/photos/12277220/pexels-photo-12277220.jpeg') center/cover no-repeat", display: "flex", alignItems: "center", justifyContent: "center", padding: 40 },
   card: { background: "#fff", borderRadius: 28, padding: 48, border: "1px solid #D8E8D4", boxShadow: "0 20px 60px rgba(45,90,39,0.08)", width: "100%", maxWidth: 440 },
   cardTop: { display: "flex", alignItems: "center", gap: 10, justifyContent: "center", marginBottom: 24 },
   cardLogoText: { fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 400, color: "#1A1F18" },
   cardTitle: { fontFamily: "Georgia, serif", fontSize: 30, fontWeight: 400, textAlign: "center", marginBottom: 8 },
   cardSub: { fontSize: 13, color: "#7A8A78", textAlign: "center", marginBottom: 32, fontWeight: 300 },
-  googleBtn: { width: "100%", padding: 14, border: "1.5px solid #D8E8D4", borderRadius: 14, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontSize: 14, fontWeight: 500, cursor: "pointer", marginBottom: 20, fontFamily: "Inter, sans-serif" },
+  googleBtn: { width: "100%", padding: 14, border: "1.5px solid #D8E8D4", borderRadius: 14, background: "#fff", color: "#1A1F18", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, fontSize: 14, fontWeight: 500, cursor: "pointer", marginBottom: 20, fontFamily: "Inter, sans-serif" },
   orRow: { display: "flex", alignItems: "center", gap: 12, marginBottom: 20 },
   orLine: { flex: 1, height: 1, background: "#D8E8D4" },
   orText: { fontSize: 12, color: "#7A8A78" },
