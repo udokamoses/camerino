@@ -16,26 +16,26 @@ export default function GenderSelect({ onSelect, user }) {
   return (
     <div style={s.root}>
       {/* Top bar */}
-      <div style={s.topBar}>
+      <div style={s.topBar} className="gs-topbar">
         <div style={s.topLogo}>
           <LogoMark size={32} />
           <span style={s.topLogoText}>Camerino</span>
         </div>
-        <div style={s.topRight}>
-          <span style={s.greeting}>Hi, {user?.displayName?.split(" ")[0] || user?.email?.split("@")[0]} 👋</span>
+        <div style={s.topRight} className="gs-topright">
+          <span style={s.greeting} className="gs-greeting">Hi, {user?.displayName?.split(" ")[0] || user?.email?.split("@")[0]} 👋</span>
           <button style={s.signOutBtn} onClick={() => signOut(auth)}>Sign out</button>
         </div>
       </div>
 
       {/* Main */}
-      <div style={s.main}>
-        <div style={s.badge}>Step 1 of 2 — Before we style</div>
-        <h1 style={s.h1}>
+      <div style={s.main} className="gs-main">
+        <div style={s.badge} className="gs-badge">Step 1 of 2 — Before we style</div>
+        <h1 style={s.h1} className="gs-h1">
           Who are we<br /><em style={{ fontStyle: "italic", color: "#C4956A" }}>dressing today?</em>
         </h1>
         <p style={s.sub}>This shapes every outfit suggestion Camerino creates for you</p>
 
-        <div style={s.cards}>
+        <div style={s.cards} className="gs-cards">
           {/* Male */}
           <div
             style={{
@@ -43,6 +43,7 @@ export default function GenderSelect({ onSelect, user }) {
               ...(selected === "male" ? s.cardActive : {}),
               ...(hoveredCard === "male" && selected !== "male" ? s.cardHover : {}),
             }}
+            className="gs-card"
             onClick={() => setSelected("male")}
             onMouseEnter={() => setHoveredCard("male")}
             onMouseLeave={() => setHoveredCard(null)}
@@ -72,6 +73,7 @@ export default function GenderSelect({ onSelect, user }) {
               ...(selected === "female" ? s.cardActive : {}),
               ...(hoveredCard === "female" && selected !== "female" ? s.cardHover : {}),
             }}
+            className="gs-card"
             onClick={() => setSelected("female")}
             onMouseEnter={() => setHoveredCard("female")}
             onMouseLeave={() => setHoveredCard(null)}
@@ -97,6 +99,7 @@ export default function GenderSelect({ onSelect, user }) {
 
         <button
           style={{ ...s.continueBtn, ...(selected ? {} : s.continueBtnDisabled) }}
+          className="gs-continue-btn"
           onClick={handleContinue}
           disabled={!selected}
         >
@@ -105,6 +108,23 @@ export default function GenderSelect({ onSelect, user }) {
 
         <p style={s.note}>You can change this anytime before each styling session</p>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .gs-topbar { padding: 14px 20px !important; }
+          .gs-topright { gap: 8px !important; }
+          .gs-greeting { display: none !important; }
+          .gs-main { padding: 40px 20px !important; }
+          .gs-h1 { font-size: 36px !important; }
+          .gs-badge { font-size: 10px !important; padding: 5px 14px !important; }
+          .gs-cards { gap: 16px !important; }
+          .gs-card { width: 100% !important; max-width: 320px !important; }
+          .gs-continue-btn { width: 100% !important; padding: 16px 24px !important; }
+        }
+        @media (max-width: 420px) {
+          .gs-h1 { font-size: 30px !important; }
+        }
+      `}</style>
     </div>
   );
 }

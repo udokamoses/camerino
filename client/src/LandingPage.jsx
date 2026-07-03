@@ -68,6 +68,33 @@ export default function LandingPage({ onGetStarted }) {
         body { background: #FAF7EE; }
         button { cursor: pointer; transition: all 0.22s ease; }
         button:hover { opacity: 0.88; transform: translateY(-2px); }
+
+        @media (max-width: 900px) {
+          .lp-wardrobe-wrap { width: 320px !important; height: 260px !important; }
+          .lp-wardrobe-name { font-size: 36px !important; }
+          .lp-nav { padding: 0 20px !important; }
+          .lp-nav-right .lp-btn-ghost { display: none !important; }
+          .lp-hero { grid-template-columns: 1fr !important; }
+          .lp-hero-left { padding: 100px 24px 56px !important; }
+          .lp-hero-h1 { font-size: 44px !important; }
+          .lp-hero-p { max-width: 100% !important; }
+          .lp-hero-stats { gap: 28px !important; }
+          .lp-stat-num { font-size: 30px !important; }
+          .lp-hero-right { min-height: 480px; }
+          .lp-how-inner { padding: 64px 24px !important; }
+          .lp-section-h2 { font-size: 34px !important; margin-bottom: 40px !important; }
+          .lp-steps-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+          .lp-cta-inner { padding: 64px 24px !important; }
+          .lp-cta-h2 { font-size: 36px !important; }
+          .lp-footer { flex-direction: column !important; gap: 16px !important; padding: 32px 24px !important; text-align: center; }
+        }
+        @media (max-width: 480px) {
+          .lp-hero-h1 { font-size: 36px !important; }
+          .lp-hero-eyebrow { font-size: 9px !important; }
+          .lp-section-h2 { font-size: 28px !important; }
+          .lp-cta-h2 { font-size: 28px !important; }
+          .lp-btn-forest, .lp-btn-cream, .lp-btn-cream-outline { padding: 12px 22px !important; font-size: 13px !important; }
+        }
       `}</style>
 
       {/* ── WARDROBE INTRO ── */}
@@ -77,7 +104,7 @@ export default function LandingPage({ onGetStarted }) {
         pointerEvents: showContent ? "none" : "all",
         transition: "opacity 0.9s ease",
       }}>
-        <div style={s.wardrobeWrap}>
+        <div style={s.wardrobeWrap} className="lp-wardrobe-wrap">
           <div style={s.wardrobeInterior}>
             <PhotoWall cols={4} rows={2} opacity={0.1} tint="rgba(15,26,14,0.6)" />
             <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: 28 }}>
@@ -91,7 +118,7 @@ export default function LandingPage({ onGetStarted }) {
               </div>
               <div style={s.wardrobeLogoWrap}>
                 <CamerinoLogo size={60} />
-                <div style={s.wardrobeName}>Camerino</div>
+                <div style={s.wardrobeName} className="lp-wardrobe-name">Camerino</div>
                 <div style={s.wardrobeTagline}>Your AI Personal Stylist</div>
               </div>
             </div>
@@ -114,43 +141,43 @@ export default function LandingPage({ onGetStarted }) {
       </div>
 
       {/* ── NAV ── */}
-      <nav style={s.nav}>
+      <nav style={s.nav} className="lp-nav">
         <div style={s.navLogo}>
           <CamerinoLogo size={42} />
           <span style={s.logoWord}>Camerino</span>
         </div>
-        <div style={s.navRight}>
-          <button style={s.btnGhost} onClick={onGetStarted}>Log in</button>
-          <button style={s.btnForest} onClick={onGetStarted}>Open your wardrobe →</button>
+        <div style={s.navRight} className="lp-nav-right">
+          <button style={s.btnGhost} className="lp-btn-ghost" onClick={onGetStarted}>Log in</button>
+          <button style={s.btnForest} className="lp-btn-forest" onClick={onGetStarted}>Open your wardrobe →</button>
         </div>
       </nav>
 
       {/* ── HERO ── */}
-      <section style={s.hero}>
+      <section style={s.hero} className="lp-hero">
 
         {/* Left */}
-        <div style={s.heroLeft}>
+        <div style={s.heroLeft} className="lp-hero-left">
           <PhotoWall cols={3} rows={3} opacity={0.22} tint="rgba(15,26,14,0.0)" />
           <div style={s.heroGradientOverlay} />
           <div style={{ position: "relative", zIndex: 2 }}>
-            <p style={s.heroEyebrow}>AI-Powered Personal Styling</p>
-            <h1 style={s.heroH1}>
+            <p style={s.heroEyebrow} className="lp-hero-eyebrow">AI-Powered Personal Styling</p>
+            <h1 style={s.heroH1} className="lp-hero-h1">
               Style what<br />
               you <em style={{ fontStyle: "italic", color: "#C4956A" }}>own.</em><br />
               Beautifully.
             </h1>
-            <p style={s.heroP}>
+            <p style={s.heroP} className="lp-hero-p">
               Upload any clothing item and Camerino instantly
               creates 5 complete outfit looks for every occasion.
             </p>
             <div style={s.heroBtns}>
-              <button style={s.btnCream} onClick={onGetStarted}>Open your wardrobe →</button>
-              <button style={s.btnCreamOutline}>See examples</button>
+              <button style={s.btnCream} className="lp-btn-cream" onClick={onGetStarted}>Open your wardrobe →</button>
+              <button style={s.btnCreamOutline} className="lp-btn-cream-outline">See examples</button>
             </div>
-            <div style={s.heroStats}>
+            <div style={s.heroStats} className="lp-hero-stats">
               {[["5", "Looks per upload"], ["10s", "To generate"], ["🌍", "Born global"]].map(([n]) => (
                 <div key={n}>
-                  <div style={s.statNum}>{n}</div>
+                  <div style={s.statNum} className="lp-stat-num">{n}</div>
                 </div>
               ))}
             </div>
@@ -158,7 +185,7 @@ export default function LandingPage({ onGetStarted }) {
         </div>
 
         {/* Right */}
-        <div style={s.heroRight}>
+        <div style={s.heroRight} className="lp-hero-right">
           <PhotoWall cols={4} rows={2} opacity={0.18} tint="rgba(238,232,216,0.65)" />
           <div style={{ position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "auto auto", gap: 14, alignContent: "center", height: "100%", padding: "40px 32px" }}>
 
@@ -205,13 +232,13 @@ export default function LandingPage({ onGetStarted }) {
       {/* ── HOW IT WORKS ── */}
       <section style={s.howSection}>
         <PhotoWall cols={6} rows={2} opacity={0.18} tint="rgba(250,247,238,0.78)" />
-        <div style={s.howInner}>
+        <div style={s.howInner} className="lp-how-inner">
           <div style={s.pill}>How it works</div>
-          <h2 style={s.sectionH2}>
+          <h2 style={s.sectionH2} className="lp-section-h2">
             From one photo to{" "}
             <em style={{ fontStyle: "italic", color: "#2D5A27" }}>five perfect looks</em>
           </h2>
-          <div style={s.stepsGrid}>
+          <div style={s.stepsGrid} className="lp-steps-grid">
             {[
               ["1", "Choose your style", "Select men's or women's styling before each session. Camerino tailors every suggestion to match your world."],
               ["2", "Upload your piece", "Photograph any item — tops, trousers, shoes, dresses, accessories. Camerino reads the color, fabric, and style."],
@@ -230,8 +257,8 @@ export default function LandingPage({ onGetStarted }) {
       {/* ── CTA ── */}
       <section style={s.ctaSection}>
         <PhotoWall cols={6} rows={2} opacity={0.16} tint="rgba(245,240,224,0.82)" />
-        <div style={s.ctaInner}>
-          <h2 style={s.ctaH2}>
+        <div style={s.ctaInner} className="lp-cta-inner">
+          <h2 style={s.ctaH2} className="lp-cta-h2">
             Ready to wear<br />
             what you{" "}
             <em style={{ fontStyle: "italic", color: "#2D5A27" }}>already own?</em>
@@ -242,7 +269,7 @@ export default function LandingPage({ onGetStarted }) {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={s.footer}>
+      <footer style={s.footer} className="lp-footer">
         <div style={s.footerLogo}>
           <CamerinoLogo size={32} />
           <span style={s.footerLogoText}>Camerino</span>
